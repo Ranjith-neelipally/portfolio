@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 interface ContainerProps {
-  backgroundColor?: string;
-  backgroundImage?: string;
+  backgroundcolor?: string;
 }
 
 export const ContentContainer = styled.div<ContainerProps>`
   display: flex;
   background-color: ${(props) =>
-  props.backgroundColor ? props.backgroundColor : "white"};
-    
+  props.backgroundcolor ? props.backgroundcolor : "white"};
   flex: 1;
   border-radius: 12px;
   padding: 12px;

@@ -1,21 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { ContentContainer } from "../CommonComponents/CommonStyles/styles";
 import { HomeComponent } from "./styles";
+import ImageCard from "../CommonComponents/ImageCard";
 
 function Home() {
-  const [elementheight, setElementheight] = useState(0);
-
   const mainRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (mainRef.current) {
-      const elementHeight = mainRef.current.clientHeight;
-      setElementheight(elementHeight * 0.6);
-    }
-  }, []);
 
   return (
     <ContentContainer>
-      <HomeComponent ref={mainRef} ElementHeight={elementheight}>
+      <HomeComponent ref={mainRef}>
         <div className="profile-wrapper">
           <div className="designation align-items-center align-items-md-start">
             <p className="human">Hi, Human! I am</p>
@@ -28,7 +21,12 @@ function Home() {
             <p className="location">India</p>
           </div>
           <div className="d-flex justify-content-center justify-content-md-end">
-            <div className="picture"></div>
+            <ImageCard
+              Elementref={mainRef}
+              borderradius="50%"
+              screenToBodyRadio={0.6}
+              backgroundimage="src/assets/profile.jpeg"
+            />
           </div>
         </div>
         <button className="btn d-flex flex-column justify-content-center align-items-center">
