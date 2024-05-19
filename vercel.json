@@ -1,0 +1,12 @@
+{
+    "build": {
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "installCommand": "npm install && npm install react@beta react-dom@beta"
+    },
+    "engines": {
+      "node": "20.x"
+    }
+  }
+  
