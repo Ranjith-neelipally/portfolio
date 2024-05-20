@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { ContentContainer } from "../CommonComponents/CommonStyles/styles";
 import { HomeComponent } from "./styles";
 import ImageCard from "../CommonComponents/ImageCard";
@@ -25,7 +25,7 @@ function Home() {
               Elementref={mainRef}
               borderradius="50%"
               screenToBodyRadio={0.6}
-              backgroundimage="src/assets/profile.jpeg"
+              backgroundimage="https://i.ibb.co/XSbrwFq/profile.jpg"
             />
           </div>
         </div>
