@@ -10,6 +10,7 @@ function App() {
   const Work = lazy(() => import("./components/Projects"));
   const Skills = lazy(() => import("./components/Resume"));
   const Testimonials = lazy(() => import("./components/Testimonials"));
+  const Admin = lazy(() => import("./components/Admin"));
 
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
               <Route path="/skills" element={<Skills />} />
               <Route path="/testimonial" element={<Testimonials />} />
               <Route path="/work" element={<Work />} />
+              <Route path="/Admin" element={<Admin />} />
               <Route path="*" element={<>no Page Found</>} /> {/* Handle 404 */}
             </Routes>
           </Suspense>
