@@ -1,25 +1,27 @@
 import { ButonProps } from "./helpers";
-import { ButtonStyles } from "./styles";
+import Button from "@mui/material/Button";
 
-function Button({
+function CustomButton({
   onClick,
   isDisabled,
   title,
   children,
-  buttonType,
+  variant = "text",
+  size,
 }: ButonProps) {
   return (
     <>
-      <ButtonStyles
+      <Button
         onClick={onClick}
         disabled={isDisabled}
-        buttonType={buttonType}
+        variant={variant}
+        size={size}
       >
         <>{children}</>
         {title}
-      </ButtonStyles>
+      </Button>
     </>
   );
 }
 
-export default Button;
+export default CustomButton;

@@ -1,8 +1,9 @@
 export interface ButonProps {
   onClick?: () => void;
   isDisabled?: boolean;
-  buttonType?: "primary" | "secondary" | "danger" | "ghost";
+  variant?: "text" | "outlined" | "contained";
   children: React.ReactNode;
   title?: string;
   className?: string;
+  size?: "small" | "medium" | "large";
 }
