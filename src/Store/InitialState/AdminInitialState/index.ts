@@ -1,7 +1,7 @@
-import { adminInitialStateInterface } from "../../../@types/AdminTypes/AdminInterface";
+import { adminInitialStateInterface } from "../../../Types/AdminTypes/AdminInterface";
 
 export const adminInitialState: adminInitialStateInterface = {
-    loading: true,
+    loading: false,
     error: "",
     data: {},
   };

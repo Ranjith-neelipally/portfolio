@@ -1,4 +1,4 @@
-import { AdminAction } from "../../../@types/AdminTypes/AdminAction";
+import { AdminAction } from "../../../Types/AdminTypes/AdminAction";
 import { adminInitialState } from "../../InitialState/AdminInitialState";
 
 export const adminReducer = (state: typeof adminInitialState, action: AdminAction) => {
@@ -21,5 +21,3 @@ export const adminReducer = (state: typeof adminInitialState, action: AdminActio
       return state;
   }
 };
-
-
