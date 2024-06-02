@@ -1,1 +1,0 @@
-import{r,A as s,j as n}from"./index-FdT3Pe6C.js";function o(){const e=r.useContext(s),t=e==null?void 0:e.state.data;return n.jsx("div",{children:n.jsx(n.Fragment,{children:n.jsx(n.Fragment,{children:t!=null&&t.adminName?t==null?void 0:t.adminName:n.jsx(n.Fragment,{children:"Loading"})})})})}export{o as default};

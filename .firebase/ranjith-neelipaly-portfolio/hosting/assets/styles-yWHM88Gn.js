@@ -1,4 +1,4 @@
-import{p as r}from"./index-FdT3Pe6C.js";const a=r.div`
+import{p as r}from"./index-BJV9Y5v0.js";const a=r.div`
   display: flex;
   background-color: ${o=>o.backgroundcolor?o.backgroundcolor:"white"};
   flex: 1;

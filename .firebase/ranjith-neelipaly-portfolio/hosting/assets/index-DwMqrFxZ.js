@@ -1,1 +1,0 @@
-import{r as o,A as r,j as t}from"./index-FdT3Pe6C.js";function c(){const e=o.useContext(r),s=e==null?void 0:e.state.data;return t.jsxs("div",{children:[t.jsx("div",{className:"name",children:s==null?void 0:s.adminName}),t.jsx("div",{className:"desc",children:s==null?void 0:s.profilePhoto})]})}export{c as default};
