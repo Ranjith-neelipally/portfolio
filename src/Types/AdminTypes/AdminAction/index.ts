@@ -1,6 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 
-
   export interface AdminPayload {
     loading?: boolean;
     error?: string;
@@ -10,4 +9,4 @@ import { PayloadAction } from "@reduxjs/toolkit";
     };
   }
   
-  export type AdminActionre = PayloadAction<AdminPayload>; 
+  export type AdminAction = PayloadAction<AdminPayload>; 

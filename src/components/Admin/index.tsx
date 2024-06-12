@@ -1,26 +1,22 @@
 // import { styled } from "@mui/material/styles";
 import { FormEvent, useContext, useEffect, useState } from "react";
-import { AdminContext } from "../../Store/Provider/AdminProvider";
 import { useAppDispatch, useAppSelector } from "../../Store/ReduxStore";
 import {
-  fetchAdminDetailsre,
+  fetchAdminDetails,
   postAdminDetails,
 } from "../../Store/Action/AdminAction";
 import { ImageToBase64 } from "../../utils/base64Converter";
 import { AdminFormFields } from "../../Types/AdminForm";
-import { updateAdminState } from "../../Store/slice";
+import { updateAdminState } from "../../Store/slice/Admin";
 import { Link } from "react-router-dom";
 export default function Admin() {
-  const adminname = useContext(AdminContext);
-  const data = adminname?.state.data;
   const [formDetails, setformDetails] = useState<AdminFormFields>();
   const dispatch = useAppDispatch();
   const selector = useAppSelector((state) => state.admin);
 
-useEffect(() => {
-  fetchAdminDetailsre(dispatch);
-
-}, [dispatch]);
+  useEffect(() => {
+    fetchAdminDetails(dispatch);
+  }, [dispatch]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,8 +56,7 @@ useEffect(() => {
     <div>
       <>
         <>
-        <Link to="/work">To Admin</Link>
-          {data?.adminName ? data?.adminName : <>Loading</>}
+          <Link to="/work">To Admin</Link>
           <div>
             form redux
             <div>

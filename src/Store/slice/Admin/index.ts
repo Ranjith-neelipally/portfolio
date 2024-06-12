@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { adminInitialState } from "../InitialState/AdminInitialState";
-import { AdminActionre } from "../../Types/AdminTypes/AdminAction";
-import { adminInitialStateInterface } from "../../Types/AdminTypes/AdminInterface";
+import { adminInitialState } from "../../InitialState/AdminInitialState";
+import { AdminAction } from "../../../Types/AdminTypes/AdminAction";
+import { adminInitialStateInterface } from "../../../Types/AdminTypes/AdminInterface";
 
 export const AdminSlice = createSlice({
   name: "adminSlice",
@@ -9,9 +9,8 @@ export const AdminSlice = createSlice({
   reducers: {
     updateAdminState: (
       state: adminInitialStateInterface,
-      action: AdminActionre
+      action: AdminAction
     ) => {
-      console.log(action.payload.data);
       return {
         ...state,
         data: action.payload.data,

@@ -1,42 +1,19 @@
 import axios from "axios";
 import { useAppDispatch } from "../../ReduxStore";
-import { updateAdminState } from "../../slice";
+import { updateAdminState } from "../../slice/Admin";
 import { AdminFormFields } from "../../../Types/AdminForm";
 
-const baseUrl = 'https://ranjith-neelipally-portfolio-backend.vercel.app/'
+const baseUrl = "https://ranjith-neelipally-portfolio-backend.vercel.app/";
 
 export const fetchAdminDetails = async (
-  dispatch: React.Dispatch<any>
+  dispatch: ReturnType<typeof useAppDispatch>
 ) => {
   try {
-    const res = await axios.get(
-      `${baseUrl}getAdminDetails?email=email@email.com`
-    );
-    dispatch({
-      type: "FETCH_SUCCESS",
-      payload: {
-        adminName: res.data.details.name,
-        profilePhoto: res.data.details.profilePhoto,
-      },
-    });
-  } catch (err: any) {
-    dispatch({
-      type: "FETCH_FAIL",
-      payload: err.message,
-    });
-  }
-};
-
-
-
-export const fetchAdminDetailsre = async (dispatch: ReturnType<typeof useAppDispatch>) => {
-  try {
-  
     dispatch(updateAdminState({ loading: true }));
     const res = await axios.get(
       `${baseUrl}getAdminDetails?email=email@email.com`
     );
-    
+
     dispatch(
       updateAdminState({
         data: {
@@ -52,13 +29,10 @@ export const fetchAdminDetailsre = async (dispatch: ReturnType<typeof useAppDisp
   }
 };
 
-export const postAdminDetails = async (formDetails: AdminFormFields ) => {
+export const postAdminDetails = async (formDetails: AdminFormFields) => {
   if (formDetails) {
     try {
-      await axios.post(
-        `${baseUrl}adminform`,
-        formDetails
-      );
+      await axios.post(`${baseUrl}adminform`, formDetails);
       console.log("Details posted successfully");
     } catch (err) {
       console.log(err);
