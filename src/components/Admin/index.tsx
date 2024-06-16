@@ -26,7 +26,7 @@ export default function Admin() {
 
   const baseURL = getEnvVariable("VITE_REACT_APP_BASE_URL");
 
-  GetAdminData("email@email.cm");
+  GetAdminData("email@email.com");
   console.log(AdminDate, "AdminDate");
 
   return (
