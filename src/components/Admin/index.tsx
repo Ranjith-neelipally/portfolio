@@ -1,111 +1,69 @@
-// import { styled } from "@mui/material/styles";
-import { FormEvent, useContext, useEffect, useState } from "react";
-import { AdminContext } from "../../Store/Provider/AdminProvider";
-import { useAppDispatch, useAppSelector } from "../../Store/ReduxStore";
-import {
-  fetchAdminDetailsre,
-  postAdminDetails,
-} from "../../Store/Action/AdminAction";
-import { ImageToBase64 } from "../../utils/base64Converter";
-import { AdminFormFields } from "../../Types/AdminForm";
-import { updateAdminState } from "../../Store/slice";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector } from "../../Store/Provider";
+import { useRef } from "react";
+import { addDate } from "../../Store/Slice/Admin";
+import { getEnvVariable } from "../../utils/helpers";
+import { GetAdminData } from "../../Store/Action/Admin";
+import { AdminPayload as AdminTypes } from "../../Store/Types/Admin";
+
 export default function Admin() {
-  const adminname = useContext(AdminContext);
-  const data = adminname?.state.data;
-  const [formDetails, setformDetails] = useState<AdminFormFields>();
-  const dispatch = useAppDispatch();
-  const selector = useAppSelector((state) => state.admin);
-
-useEffect(() => {
-  fetchAdminDetailsre(dispatch);
-
-}, [dispatch]);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name") as string;
-    const file = formData.get("file") as File;
-    const email = formData.get("email") as string;
-
-    const base64 = await ImageToBase64(file);
-    setformDetails((prevState) => ({
-      ...prevState,
-      name,
-      profilePhoto: base64,
-      email,
-    }));
-    console.log(formDetails, "details");
-  };
-
-  const handleButtonClick = () => {
-    if (formDetails) {
-      postAdminDetails(formDetails);
+  const anitherData = useAppSelector((state) => state.Admin);
+  const AdminDate: AdminTypes = useSelector((state: any) => state.Admin);
+  const ProjectData = useAppSelector((state) => state.Projects);
+  const dispatch = useDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleClick = () => {
+    if (inputRef.current) {
       dispatch(
-        updateAdminState({
+        addDate({
           data: {
-            adminName: formDetails?.name,
-            profilePhoto: formDetails?.profilePhoto,
+            name: inputRef.current.value,
           },
-          error: "",
         })
       );
-    } else {
-      console.error("Form details are undefined");
     }
   };
 
+  const baseURL = getEnvVariable("VITE_REACT_APP_BASE_URL");
+
+  GetAdminData("email@email.cm");
+  console.log(AdminDate, "AdminDate");
+
   return (
     <div>
-      <>
-        <>
-        <Link to="/work">To Admin</Link>
-          {data?.adminName ? data?.adminName : <>Loading</>}
-          <div>
-            form redux
-            <div>
-              <div>
-                admin name :
-                {selector.loading === true
-                  ? "loading"
-                  : selector.data?.adminName}
-              </div>
-              admin pic:
-              <img
-                style={{ height: "50px", width: "50px" }}
-                src={
-                  selector.loading === true
-                    ? "loading"
-                    : selector.data?.profilePhoto
-                }
-                alt="profile"
-              />
-            </div>
-          </div>
-
-          <button>check me and lol</button>
-        </>
-      </>
-      <>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input type="text" name="name" placeholder="name" />
-          <input type="file" name="file" placeholder="choose" />
-          <input type="text" name="email" placeholder="choose" />
-          <button type="submit">submit</button>
-        </form>
-      </>
-
+      index
       <div>
-        <h1>name</h1>: {formDetails?.name}
-        <h1>file</h1>:{" "}
-        {formDetails?.profilePhoto ? (
-          <>{formDetails?.profilePhoto}</>
+        name:
+        {AdminDate.loading === true ? (
+          <>loading</>
         ) : (
-          <>no file found</>
+          <>{AdminDate.data?.name}</>
         )}
-        <div></div>
-        <button onClick={handleButtonClick}>sumbit</button>
+      </div>
+      <div>email{AdminDate.data?.email}</div>
+      <div>Error:{AdminDate.error && <div>{AdminDate.error}</div>}</div>
+      <div className="d-flex card flex-column gap-3">
+        <label htmlFor="text">Name</label>
+        <input type="text" className="form-control" ref={inputRef} />
+        <button className="btn btn-dark" onClick={handleClick}>
+          Add Data
+        </button>
+      </div>
+      <div>
+        base URL: <span className="bg-danger border">{baseURL}</span>
+      </div>
+      <div>
+        projects:
+        {ProjectData.data &&
+          ProjectData.data.projects.map((items, index) => (
+            <div key={index}>
+              <header>{index + 1}</header>
+              <div>name:{items.name}</div>
+              <div>description:{items.description}</div>
+              <div>image:{items.image}</div>
+              <div>url:{items.url}</div>
+            </div>
+          ))}
       </div>
     </div>
   );

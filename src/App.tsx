@@ -2,9 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import TopNavBar from "./components/TopNavBar";
 import { Suspense, lazy } from "react";
-import { AdminProvider } from "./Store/Provider/AdminProvider";
 import { Provider } from "react-redux";
-import { store } from "./Store/ReduxStore";
 
 function App() {
   const Home = lazy(() => import("./components/Home"));
@@ -16,12 +14,12 @@ function App() {
   const Admin = lazy(() => import("./components/Admin"));
 
   return (
-    <Provider store={store}>
+    <>
       <Router>
         <>
           <TopNavBar />
         </>
-        <AdminProvider>
+        <>
           <main className="d-flex flex-1 h-100 overflow-auto bg-light px-3">
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
@@ -36,9 +34,9 @@ function App() {
               </Routes>
             </Suspense>
           </main>
-        </AdminProvider>
+        </>
       </Router>
-    </Provider>
+    </>
   );
 }
 
