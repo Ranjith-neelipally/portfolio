@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface HomeComponentProps {
-  backgroundImage?: string;
+  backgroundimage?: string;
   ElementHeight?: number;
 }
 

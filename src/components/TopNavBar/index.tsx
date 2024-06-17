@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 import { TopNavigation, NavItems } from "./styles";
 import { CustomNavLink } from "./CustomeNavLink";
 
-function TopNavBar() {
+interface TopNavBarProps {
+  backgroundcolor?: string;
+}
+
+function TopNavBar({ backgroundcolor }: TopNavBarProps) {
   const NavItemArray = [
     {
       name: "About",
@@ -27,7 +31,9 @@ function TopNavBar() {
   ];
 
   return (
-    <TopNavigation className="flex-column flex-md-row gap-2 align-items-start align-items-md-center bg-light">
+    <TopNavigation
+      backgroundcolor={backgroundcolor}
+    >
       <div className="right-section flex-row justify-content-start">
         <>
           <Link to="/" title="Home" tabIndex={0} className="nav-item">
@@ -35,7 +41,9 @@ function TopNavBar() {
           </Link>
         </>
         <>
-          <div className="name">© <span>Code by</span></div>
+          <div className="name">
+            © <span>Code by</span>
+          </div>
         </>
       </div>
       <nav

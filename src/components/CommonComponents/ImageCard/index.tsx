@@ -26,7 +26,7 @@ function ImageCard({
     <>
       <ImageContiner
         elementheight={elementheight}
-        backgroundImage={backgroundimage}
+        backgroundimage={backgroundimage}
         borderradius={borderradius}
       />
     </>

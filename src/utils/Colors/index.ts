@@ -1,7 +1,3 @@
-import { useSelector } from "react-redux";
-import { ThemeInterFace } from "../../Store/Types/Theme";
-import { RootState } from "../../Store/Provider";
-
 interface ColorScheme {
   primary: string;
   surfaceTint: string;
@@ -54,10 +50,11 @@ interface ColorScheme {
   surfaceContainerHighest: string;
 }
 
-const theme: ThemeInterFace = useSelector((state: RootState) => state.Theme);
-console.log(theme, "theme");
+interface ColorSchemes extends ColorScheme {
+  theme?: "light" | "dark";
+}
 
-const getColorScheme = (theme: "light" | "dark"): ColorScheme => ({
+export const getColorScheme = (theme: string): ColorScheme => ({
   primary: theme === "light" ? "#626117" : "#CCCB75",
   surfaceTint: theme === "light" ? "#626117" : "#CCCB75",
   onPrimary: theme === "light" ? "#FFFFFF" : "#333200",
@@ -103,12 +100,9 @@ const getColorScheme = (theme: "light" | "dark"): ColorScheme => ({
   surfaceDim: theme === "light" ? "#DDDACD" : "#14140C",
   surfaceBright: theme === "light" ? "#FFFFFF" : "#3A3930",
   surfaceContainerLowest: theme === "light" ? "#FFFFFF" : "#0F0F07",
-  surfaceContainerLow: theme === "light" ? "#F7F4E6" : "#1C1C14",
+  surfaceContainerLow: theme === "light" ? "#F5F1EA" : "#1C1C14",
   surfaceContainer: theme === "light" ? "#F2EEE0" : "#202018",
-  surfaceContainerHigh: theme === "light" ? "#ECE8DB" : "#2B2A22",
+  surfaceContainerHigh: theme === "light" ? "#ECE9DF" : "#2B2A22",
   surfaceContainerHighest: theme === "light" ? "#E6E2D5" : "#36352C",
 });
 
-export const Colors: ColorScheme = {
-  ...getColorScheme("dark"),
-};

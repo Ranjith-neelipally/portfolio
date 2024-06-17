@@ -4,12 +4,22 @@ import { HomeComponent } from "./styles";
 import ImageCard from "../CommonComponents/ImageCard";
 import Button from "@mui/material/Button";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useAppDispatch, useAppSelector } from "../../Store/Provider";
+import { ToggleTheme } from "../../Store/Slice/Theme";
+import { getColorScheme } from "../../utils/Colors";
 
 function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
+  const useTheme = useAppSelector((state) => state.Theme);
+  const dispatch = useAppDispatch();
+  const clickHandler = () => {
+    if (useTheme.currentTheme === "dark")
+      dispatch(ToggleTheme({ currentTheme: "light" }));
+    else dispatch(ToggleTheme({ currentTheme: "dark" }));
+  };
 
   return (
-    <ContentContainer>
+    <>
       <HomeComponent ref={mainRef}>
         <div className="profile-wrapper">
           <div className="designation align-items-center align-items-md-start">
@@ -32,7 +42,7 @@ function Home() {
           </div>
         </div>
         <div>
-          <Button variant="text">
+          <Button variant="text" onClick={clickHandler}>
             Hello world
             <>
               <ArrowDropDownIcon />
@@ -40,7 +50,7 @@ function Home() {
           </Button>
         </div>
       </HomeComponent>
-    </ContentContainer>
+    </>
   );
 }
 

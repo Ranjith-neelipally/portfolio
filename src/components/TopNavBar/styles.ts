@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const TopNavigation = styled.header`
+interface TopNavBarProps {
+  backgroundcolor?: string;
+}
+
+export const TopNavigation = styled.header<TopNavBarProps>`
   display: flex;
   justify-content: space-between;
-  padding: 14px 8px;
-  border-radius: 40px;
+  background-color: ${(props) => props.backgroundcolor};
+  border-radius: 12px;
 
   .right-section {
     display: flex;
@@ -35,7 +39,7 @@ export const TopNavigation = styled.header`
     }
 
     .name {
-      font-weight: 600;
+      font-weight: 500;
       font-size: 16px;
       cursor: pointer;
       padding: 16px 0;

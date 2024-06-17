@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ImageContinerProps {
-  backgroundImage?: string;
+  backgroundimage?: string;
   elementheight?: number;
   borderradius?: string;
 }
@@ -13,7 +13,7 @@ export const ImageContiner = styled.div<ImageContinerProps>`
   width: ${(props) =>
     props.elementheight ? `${props.elementheight}px` : "300px"};
   background-image: url(
-    ${(props) => (props.backgroundImage ? props.backgroundImage : "")}
+    ${(props) => (props.backgroundimage ? props.backgroundimage : "")}
   );
   background-size: cover;
   border-radius: ${(props) => (props.borderradius ? props.borderradius : "12px")};
