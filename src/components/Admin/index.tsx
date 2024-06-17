@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { addDate } from "../../Store/Slice/Admin";
 import { getEnvVariable } from "../../utils/helpers";
 import { GetAdminData } from "../../Store/Action/Admin";
-import { AdminPayload as AdminTypes } from "../../Store/Types/Admin";
+import { AdminState as AdminTypes } from "../../Store/Types/Admin";
 
 export default function Admin() {
   const anitherData = useAppSelector((state) => state.Admin);

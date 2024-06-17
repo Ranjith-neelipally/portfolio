@@ -6,7 +6,7 @@ export const AdminSlice = createSlice({
   name: "admin",
   initialState: AdminInitialState,
   reducers: {
-    addDate: (state: AdminPayload, action: AdminState) => {
+    addDate: (state: AdminState, action: AdminPayload) => {
       return { ...state, ...action.payload };
     },
   },

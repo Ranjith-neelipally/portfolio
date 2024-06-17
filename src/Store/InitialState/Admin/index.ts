@@ -1,6 +1,6 @@
-import { AdminPayload } from "../../Types/Admin";
+import { AdminState } from "../../Types/Admin";
 
-export const AdminInitialState: AdminPayload = {
+export const AdminInitialState: AdminState = {
   loading: false,
   error: false,
   data: {

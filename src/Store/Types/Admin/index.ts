@@ -6,10 +6,10 @@ export interface Admin {
   email?: string;
 }
 
-export interface AdminPayload {
+export interface AdminState {
   loading?: boolean;
   error?: string | boolean;
   data?: Admin;
 }
 
-export type AdminState = PayloadAction<AdminPayload>;
+export type AdminPayload = PayloadAction<AdminState>;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Colors } from "../../../utils/Colors";
 
 interface ContainerProps {
   backgroundcolor?: string;
@@ -6,8 +7,7 @@ interface ContainerProps {
 
 export const ContentContainer = styled.div<ContainerProps>`
   display: flex;
-  background-color: ${(props) =>
-  props.backgroundcolor ? props.backgroundcolor : "white"};
+  background-color: ${Colors.surfaceContainer};
   flex: 1;
   border-radius: 12px;
   padding: 12px;
