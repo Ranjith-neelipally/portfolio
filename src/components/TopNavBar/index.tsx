@@ -19,8 +19,6 @@ function TopNavBarComponnet() {
     };
   }, []);
 
-  console.log(currentUrl);
-
   const handleClick = (path: string) => {
     navigate(path);
     setcurrentUrl(path);
@@ -100,7 +98,7 @@ function TopNavBarComponnet() {
     },
   ];
 
-  return <TopNavBar navItems={NavItemArray}/>;
+  return <TopNavBar navItems={NavItemArray} topnavIcon={<>NR</>}/>;
 }
 
 export default TopNavBarComponnet;
