@@ -1,65 +1,106 @@
-import { Link } from "react-router-dom";
-import { TopNavigation, NavItems } from "./styles";
-import { CustomNavLink } from "./CustomeNavLink";
+import { TopNavBar } from "my-material-theme-ui-components";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function TopNavBar() {
+function TopNavBarComponnet() {
+  const navigate = useNavigate();
+
+  const [currentUrl, setcurrentUrl] = useState("/");
+
+  const GetCurrentUrl = () => {
+    setcurrentUrl(window.location.pathname);
+  };
+
+  useEffect(() => {
+    GetCurrentUrl();
+    window.addEventListener("popstate", GetCurrentUrl);
+    return () => {
+      window.removeEventListener("popstate", GetCurrentUrl);
+    };
+  }, []);
+
+  console.log(currentUrl);
+
+  const handleClick = (path: string) => {
+    navigate(path);
+    setcurrentUrl(path);
+  };
   const NavItemArray = [
     {
-      name: "About",
-      link: "/about",
+      id: "home",
+      label: "Home",
+      className: "nav-item",
+      ariaLabel: "Navigation Item 1",
+      isDisabled: false,
+      isClickable: true,
+      $isActive: currentUrl === "/",
+      onClick: () => {
+        handleClick("/");
+      },
     },
     {
-      name: "Work",
-      link: "/work",
+      id: "navItem2",
+      label: "About",
+      className: "nav-item",
+      ariaLabel: "Navigation Item 2",
+      isDisabled: false,
+      isClickable: true,
+      $isActive: currentUrl === "/about",
+      onClick: () => {
+        handleClick("/about");
+      },
     },
     {
-      name: "Skills",
-      link: "/skills",
+      id: "navItem3",
+      label: "Work",
+      className: "nav-item",
+      ariaLabel: "Navigation Item 3",
+      isDisabled: false,
+      isClickable: true,
+      $isActive: currentUrl === "/work",
+      onClick: () => {
+        handleClick("/work");
+      },
     },
     {
-      name: "Contact",
-      link: "/contact",
+      id: "navItem4",
+      label: "Skills",
+      className: "nav-item",
+      ariaLabel: "Navigation Item 4",
+      isDisabled: false,
+      isClickable: true,
+      $isActive: currentUrl === "/skills",
+      onClick: () => {
+        handleClick("/skills");
+      },
     },
     {
-      name: "Testimonials",
-      link: "/testimonials",
+      id: "Contact",
+      label: "Testimonials",
+      className: "nav-item",
+      ariaLabel: "Navigation Item 5",
+      isDisabled: false,
+      isClickable: true,
+      $isActive: currentUrl === "/testimonial",
+      onClick: () => {
+        handleClick("/testimonial");
+      },
+    },
+    {
+      id: "Testimonials",
+      label: "Contact",
+      className: "nav-item",
+      ariaLabel: "Navigation Item 6",
+      isDisabled: false,
+      isClickable: true,
+      $isActive: currentUrl === "/contact",
+      onClick: () => {
+        handleClick("/contact");
+      },
     },
   ];
 
-  return (
-    <TopNavigation className="flex-column flex-md-row gap-2 align-items-start align-items-md-center bg-light">
-      <div className="right-section flex-row justify-content-start">
-        <>
-          <Link to="/" title="Home" tabIndex={0} className="nav-item">
-            <div className="avatar">NR</div>
-          </Link>
-        </>
-        <>
-          <div className="name">© <span>Code by</span></div>
-        </>
-      </div>
-      <nav
-        className="left-section justify-content-end"
-        aria-label="Main navigation"
-      >
-        <NavItems className="">
-          {NavItemArray.map((item, index) => (
-            <li key={index} title={item.name}>
-              <CustomNavLink
-                tabIndex={0}
-                to={item.link}
-                className={(isActive) =>
-                  isActive ? "nav-item active shadow-sm" : "nav-item"
-                }
-              >
-                {item.name}
-              </CustomNavLink>
-            </li>
-          ))}
-        </NavItems>
-      </nav>
-    </TopNavigation>
-  );
+  return <TopNavBar navItems={NavItemArray}/>;
 }
 
-export default TopNavBar;
+export default TopNavBarComponnet;
