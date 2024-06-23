@@ -2,14 +2,12 @@ import { useRef } from "react";
 import { ContentContainer } from "../CommonComponents/CommonStyles/styles";
 import { HomeComponent } from "./styles";
 import ImageCard from "../CommonComponents/ImageCard";
-import Button from "@mui/material/Button";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
 
   return (
-    <ContentContainer>
+    <ContentContainer backgroundcolor="#dddad0">
       <HomeComponent ref={mainRef}>
         <div className="profile-wrapper">
           <div className="designation align-items-center align-items-md-start">
@@ -30,14 +28,6 @@ function Home() {
               backgroundimage="https://i.ibb.co/XSbrwFq/profile.jpg"
             />
           </div>
-        </div>
-        <div>
-          <Button variant="text">
-            Hello world
-            <>
-              <ArrowDropDownIcon />
-            </>
-          </Button>
         </div>
       </HomeComponent>
     </ContentContainer>
