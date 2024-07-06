@@ -6,8 +6,8 @@ interface ImageContinerProps {
   $borderradius?: string;
 }
 export const ImageContiner = styled.div<ImageContinerProps>`
-  max-height: 65vw;
-  max-width: 65vw;
+  max-height: 35vw;
+  max-width: 35vw;
   height: ${(props) =>
     props.$elementheight ? `${props.$elementheight}px` : "300px"};
   width: ${(props) =>
