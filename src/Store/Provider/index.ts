@@ -1,11 +1,13 @@
-import { configureStore, createSlice, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { adminreducer } from "../Slice/Admin";
 import { projectsreducer } from "../Slice/Projects";
+import { displayreducer } from "../Slice/Display";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
   Admin: adminreducer,
   Projects: projectsreducer,
+  Display: displayreducer,
 });
 
 export const Store = configureStore({

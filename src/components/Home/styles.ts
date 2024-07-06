@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Flex, Flex1 } from "../CommonComponents/CommonStyles/styles";
 
 interface HomeComponentProps {
   backgroundImage?: string;
@@ -6,57 +7,44 @@ interface HomeComponentProps {
 }
 
 export const HomeComponent = styled.div<HomeComponentProps>`
-  display: flex;
-  flex: 1;
-  overflow: auto;
-  flex-direction: column;
-  justify-content: space-around;
+  ${Flex1}
+  flex-direction: row;
 
-  .profile-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap-reverse;
-
-    .designation {
-      font-size: clamp(26px, 10vw, 60px);
-      font-weight: 700;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-
-      p {
-        margin: 0;
-      }
-
-      .human {
-        margin: 0;
-        margin-top: 2%;
-        font-size: 24px;
-        padding: 12px;
-        border: 1px solid green;
-        border-radius: 40px;
-        background-color: lightgreen;
-        color: black;
-        transform: rotate(-5deg);
-      }
-      .location {
-        font-size: clamp(32px, 2vw, 48px);
-      }
+  .designation {
+    ${Flex}
+    font-size: clamp(26px, 10vw, 50px);
+    font-weight: 700;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    align-items: flex-start;
+    .human {
+      font-size: 24px;
+      padding: 12px;
+      border-radius: 40px;
+      background-color: #cccb75;
+      color: black;
+      transform: rotate(-5deg);
+      line-height: 20px;
+      font-weight: 600;
+      width: fit-content;
     }
 
-    .picture {
-      max-height: 75vw;
-      max-width: 75vw;
-      height: ${(props) =>
-        props.ElementHeight ? `${props.ElementHeight}px` : "300px"};
-      width: ${(props) =>
-        props.ElementHeight ? `${props.ElementHeight}px` : "300px"};
-      background-image: url("src/assets/profile.jpeg");
-      background-size: cover;
-      border-radius: 50%;
-      background-position: center;
+    p {
+      width: 100%;
+      text-align: start;
     }
+
+    p:nth-child(4) {
+      text-align: end;
+    }
+
+    .location {
+      font-size: clamp(32px, 2vw, 48px);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
   }
 `;

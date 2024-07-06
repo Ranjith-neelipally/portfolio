@@ -26,7 +26,6 @@ export const GetAdminData = (email: Admin["email"]) => {
             params: { email },
           }
         );
-        console.log(responseData, "responseData");
 
         if (responseData.status === 200 && responseData.data) {
           dispatch(
@@ -44,4 +43,23 @@ export const GetAdminData = (email: Admin["email"]) => {
 
     fetchData();
   }, [dispatch, baseUrl]);
+};
+
+export const AddProject = (email: Admin["email"]) => {
+  const baseUrl = "https://ranjith-neelipally-portfolio-backend.vercel.app/";
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}projects/get-all`, {
+          params: { email },
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching project data:", error);
+      }
+    };
+
+    fetchProjects();
+  }, [email]);
 };

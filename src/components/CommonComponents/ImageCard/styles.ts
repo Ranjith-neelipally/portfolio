@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
 interface ImageContinerProps {
-  backgroundImage?: string;
-  elementheight?: number;
-  borderradius?: string;
+  $backgroundImage?: string;
+  $elementheight?: number;
+  $borderradius?: string;
 }
 export const ImageContiner = styled.div<ImageContinerProps>`
-  max-height: 75vw;
-  max-width: 75vw;
+  max-height: 65vw;
+  max-width: 65vw;
   height: ${(props) =>
-    props.elementheight ? `${props.elementheight}px` : "300px"};
+    props.$elementheight ? `${props.$elementheight}px` : "300px"};
   width: ${(props) =>
-    props.elementheight ? `${props.elementheight}px` : "300px"};
+    props.$elementheight ? `${props.$elementheight}px` : "300px"};
   background-image: url(
-    ${(props) => (props.backgroundImage ? props.backgroundImage : "")}
+    ${(props) => (props.$backgroundImage ? props.$backgroundImage : "")}
   );
   background-size: cover;
-  border-radius: ${(props) => (props.borderradius ? props.borderradius : "12px")};
+  border-radius: ${(props) => (props.$borderradius ? props.$borderradius : "12px")};
   background-position: center;
 `;

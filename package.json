@@ -15,7 +15,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
-    "my-material-theme-ui-components": "^0.0.15",
+    "my-material-theme-ui-components": "^0.0.154",
     "react": "^18.3.0-canary-493f72b0a-20230727",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

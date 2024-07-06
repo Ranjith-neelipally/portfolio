@@ -3,8 +3,9 @@ import { useAppSelector } from "../../Store/Provider";
 import { useRef } from "react";
 import { addDate } from "../../Store/Slice/Admin";
 import { getEnvVariable } from "../../utils/helpers";
-import { GetAdminData } from "../../Store/Action/Admin";
+import { AddProject, GetAdminData } from "../../Store/Action/Admin";
 import { AdminPayload as AdminTypes } from "../../Store/Types/Admin";
+import { AdminStyles } from "./styles";
 
 export default function Admin() {
   const anitherData = useAppSelector((state) => state.Admin);
@@ -27,10 +28,11 @@ export default function Admin() {
   const baseURL = getEnvVariable("VITE_REACT_APP_BASE_URL");
 
   GetAdminData("email@email.com");
+  AddProject("ranjithkrn99@gmail.com");
   console.log(AdminDate, "AdminDate");
 
   return (
-    <div>
+    <AdminStyles>
       index
       <div>
         name:
@@ -65,6 +67,6 @@ export default function Admin() {
             </div>
           ))}
       </div>
-    </div>
+    </AdminStyles>
   );
 }

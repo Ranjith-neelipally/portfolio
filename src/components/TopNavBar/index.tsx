@@ -1,8 +1,8 @@
-import { TopNavBar } from "my-material-theme-ui-components";
+import { TopNavBar, Avatar } from "my-material-theme-ui-components";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function TopNavBarComponnet() {
+function TopNavBarComponnet({ isMobile }: any) {
   const navigate = useNavigate();
 
   const [currentUrl, setcurrentUrl] = useState("/");
@@ -19,7 +19,6 @@ function TopNavBarComponnet() {
     };
   }, []);
 
-  console.log(currentUrl);
 
   const handleClick = (path: string) => {
     navigate(path);
@@ -100,7 +99,15 @@ function TopNavBarComponnet() {
     },
   ];
 
-  return <TopNavBar navItems={NavItemArray}/>;
+  return (
+    <TopNavBar
+      navItems={NavItemArray}
+      topnavIcon={<Avatar label="Ranjith" />}
+      navbarHeaderText="Ranjith Neelipally"
+      navBarHeaderDesc="Front-end, UX/UI Developer"
+      $navLoaction={isMobile ? "" : "side"}
+    />
+  );
 }
 
 export default TopNavBarComponnet;
