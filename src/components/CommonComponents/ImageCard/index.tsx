@@ -21,7 +21,7 @@ function ImageCard({
       const elementheight = $Elementref.current.clientWidth;
       setelementheight(elementheight * $screenToBodyRadio);
     }
-  }, []);
+  }, [$screenToBodyRadio, $Elementref]);
   return (
     <>
       <ImageContiner

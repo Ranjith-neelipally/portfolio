@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface ContainerProps {
-  backgroundcolor?: string;
+  $backgroundcolor?: string;
 }
 
 interface Flex1Props {
@@ -23,7 +23,7 @@ export const Flex1 = css`
 export const ContentContainer = styled.div<ContainerProps>`
   ${Flex1}
   background-color: ${(props) =>
-    props.backgroundcolor ? props.backgroundcolor : "white"};
+    props.$backgroundcolor ? props.$backgroundcolor : "transparent"};
   border-radius: 12px;
   padding: 12px;
   overflow: auto;
@@ -37,4 +37,18 @@ export const Flex1Container = styled.div<Flex1Props>`
   align-items: ${({ $alignItems }) => ($alignItems ? $alignItems : "center")};
   justify-content: ${({ $justifyContent }) =>
     $justifyContent ? $justifyContent : "center"};
+`;
+export const PrimaryButton = styled.button`
+  white-space: nowrap;
+  background-color: #cccb75;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: normal;
+  color: #333200;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  flex: 1;
 `;

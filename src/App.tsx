@@ -11,7 +11,7 @@ function App() {
   const About = lazy(() => import("./components/About"));
   const Contact = lazy(() => import("./components/Contact"));
   const Work = lazy(() => import("./components/Projects"));
-  const Skills = lazy(() => import("./components/Resume"));
+  const Skills = lazy(() => import("./components/Skills"));
   const Testimonials = lazy(() => import("./components/Testimonials"));
   const Admin = lazy(() => import("./components/Admin"));
   toggleScreenSize();
@@ -19,8 +19,8 @@ function App() {
   return (
     <RootElement
       className="overflow-auto"
-      $flexDirection={isSize ? "column" : "row"}
-      $padding="16px"
+      // $flexDirection={isSize ? "column" : "row"}
+      // $padding="16px"
       $gap="16px"
     >
       <>

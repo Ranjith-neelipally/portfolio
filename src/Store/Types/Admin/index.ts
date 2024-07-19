@@ -1,7 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export interface Admin {
-  name?: string;
+  userName?: string;
   profilePic?: string;
   email?: string;
 }
@@ -9,7 +9,7 @@ export interface Admin {
 export interface AdminPayload {
   loading?: boolean;
   error?: string | boolean;
-  data?: Admin;
+  data?: Admin | null;
 }
 
 export type AdminState = PayloadAction<AdminPayload>;

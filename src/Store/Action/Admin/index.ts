@@ -1,13 +1,15 @@
 import axios from "axios";
 import { getEnvVariable } from "../../../utils/helpers";
 import { useDispatch } from "react-redux";
-import { addDate } from "../../Slice/Admin";
+import { addAdminData } from "../../Slice/Admin";
 import { useEffect } from "react";
 import { Admin } from "../../Types/Admin";
+import { useAppSelector } from "../../Provider";
+import { SessionStorageManager } from "../../../utils/helpers/SessionStorageManager";
 
 interface ApiResponse {
   status: number;
-  data: {
+  response: {
     details?: Admin;
     error?: string;
   };
@@ -16,28 +18,40 @@ interface ApiResponse {
 export const GetAdminData = (email: Admin["email"]) => {
   const baseUrl = getEnvVariable("VITE_REACT_APP_BASE_URL");
   const dispatch = useDispatch();
+  const adminState = useAppSelector((state) => state.Admin);
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        dispatch(addDate({ loading: true }));
-        const responseData: ApiResponse = await axios.get(
-          `${baseUrl}getAdminDetails`,
-          {
-            params: { email },
-          }
-        );
+      if (adminState.data?.email !== "") {
+        return;
+      }
 
-        if (responseData.status === 200 && responseData.data) {
-          dispatch(
-            addDate({
-              loading: false,
-              data: responseData.data.details,
-              error: responseData.data.error,
-            })
-          );
+      const sessionData = SessionStorageManager({
+        action: "get",
+        key: "admin",
+      });
+      if (sessionData) {
+        dispatch(addAdminData({ data: sessionData, loading: false }));
+        return;
+      }
+      try {
+        dispatch(addAdminData({ loading: true, error: false }));
+        const response = await axios.get<ApiResponse>(`${baseUrl}get-admin`, {
+          params: { email },
+        });
+
+        if (response.status === 200 && response.data) {
+          const adminDetails: any = response.data.response;
+          dispatch(addAdminData({ data: adminDetails, loading: false }));
+          SessionStorageManager({
+            action: "set",
+            key: "admin",
+            data: adminDetails,
+          });
         }
       } catch (error) {
         console.error("Error fetching admin data:", error);
+        dispatch(addAdminData({ loading: false, error: "error.message" }));
       }
     };
 
@@ -46,7 +60,7 @@ export const GetAdminData = (email: Admin["email"]) => {
 };
 
 export const AddProject = (email: Admin["email"]) => {
-  const baseUrl = "https://ranjith-neelipally-portfolio-backend.vercel.app/";
+  const baseUrl = getEnvVariable("VITE_REACT_APP_BASE_URL");
 
   useEffect(() => {
     const fetchProjects = async () => {

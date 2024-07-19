@@ -4,7 +4,7 @@ export const AdminInitialState: AdminPayload = {
   loading: false,
   error: false,
   data: {
-    name: "",
+    userName: "",
     profilePic: "",
     email: "",
   },

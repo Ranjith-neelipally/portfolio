@@ -105,7 +105,7 @@ function TopNavBarComponnet({ isMobile }: any) {
       topnavIcon={<Avatar label="Ranjith" />}
       navbarHeaderText="Ranjith Neelipally"
       navBarHeaderDesc="Front-end, UX/UI Developer"
-      $navLoaction={isMobile ? "" : "side"}
+      // $navLoaction={isMobile ? "" : "side"}
     />
   );
 }

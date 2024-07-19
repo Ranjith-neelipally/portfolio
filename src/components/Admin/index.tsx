@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useAppSelector } from "../../Store/Provider";
 import { useRef } from "react";
-import { addDate } from "../../Store/Slice/Admin";
+import { addAdminData } from "../../Store/Slice/Admin";
 import { getEnvVariable } from "../../utils/helpers";
 import { AddProject, GetAdminData } from "../../Store/Action/Admin";
 import { AdminPayload as AdminTypes } from "../../Store/Types/Admin";
@@ -16,7 +16,7 @@ export default function Admin() {
   const handleClick = () => {
     if (inputRef.current) {
       dispatch(
-        addDate({
+        addAdminData({
           data: {
             name: inputRef.current.value,
           },
@@ -27,7 +27,6 @@ export default function Admin() {
 
   const baseURL = getEnvVariable("VITE_REACT_APP_BASE_URL");
 
-  GetAdminData("email@email.com");
   AddProject("ranjithkrn99@gmail.com");
   console.log(AdminDate, "AdminDate");
 
