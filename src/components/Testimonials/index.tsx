@@ -6,16 +6,29 @@ import { PrimaryButton } from "../CommonComponents/CommonStyles/styles";
 import Modal from "../CommonComponents/Modal";
 
 import { TestimonialContainer } from "./styles";
-
+import { AddNewTestimonial } from "../../Store/Action/Testimonial/Addtestimonial";
+interface TestimonialFormData {
+  adminMail?: string;
+  userName?: string;
+  email?: string;
+  designation?: string;
+  message?: string;
+}
+interface AddNewTestimonialProps {
+  formdata: FormData;
+}
 function Testimonials() {
   GetAllTestimonials();
   const AllData = useAppSelector((state) => state.Testimonials.data);
   const [isModal, setisModal] = useState(false);
-  const [formData, setFormData] = useState({
-    userName: "",
-    message: "",
-    email: "",
+  const [formData, setFormData] = useState<TestimonialFormData>({
+    adminMail: "string",
+    userName: "string",
+    email: "string",
+    designation: "string",
+    message: "string",
   });
+
   const handleModal = () => {
     setisModal(!isModal);
   };
@@ -32,8 +45,8 @@ function Testimonials() {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log(formData);
+    AddNewTestimonial(formData);
   };
 
   const RenderModalBody = () => {

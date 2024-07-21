@@ -8,8 +8,7 @@ export const SkillsContainer = styled.div<SkillsProps>`
   display: flex;
   align-items: center;
   flex: 1;
-  gap: 18%;
-  flex-wrap: wrap;
+  gap: 12px;
   overflow: auto;
   flex-direction: column;
   .heading-text {
@@ -26,6 +25,11 @@ export const ContainerStyles = styled.div<SkillsProps>`
   display: flex;
   gap: 25px;
   flex-wrap: wrap;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    overflow: auto;
+  }
 `;
 
 export const SkillsWrapper = styled.div<SkillsProps>`
@@ -34,8 +38,9 @@ export const SkillsWrapper = styled.div<SkillsProps>`
   max-width: 300px;
   display: flex;
   flex-direction: column;
-  height: 300px;
   overflow: auto;
+  min-height: 250px;
+  max-height: 40vh;
 
   .header {
     border-radius: 10px 10px 0px 0px;
@@ -51,7 +56,6 @@ export const SkillsWrapper = styled.div<SkillsProps>`
     list-style: none;
     margin: 0;
     padding: 0;
-    padding-bottom: 12px;
     border-radius: 0px 0px 10px 10px;
     font-size: clamp(0.6vw, 3vw, 1.2vw);
 
@@ -59,6 +63,10 @@ export const SkillsWrapper = styled.div<SkillsProps>`
       padding: 12px 20px;
       border-bottom: 1px solid #ccc;
       font-weight: 600;
+
+      &:last-child{
+        border: none;
+      }
     }
   }
   &:first-child {
@@ -125,6 +133,7 @@ export const SkillsWrapper = styled.div<SkillsProps>`
 
   @media (max-width: 768px) {
     width: 100%;
+    min-height: fit-content;
     &:first-child {
       transform: unset;
       animation: unset;

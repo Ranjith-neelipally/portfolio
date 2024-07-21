@@ -11,7 +11,6 @@ import Card from "../CommonComponents/Card";
 
 function Projects() {
   const [projectsData, setprojectsData] = useState<ProjectsPayload>();
-  const [parentWidth, setparentWidth] = useState<number>(0);
   const projects: ProjectsPayload = useAppSelector((state) => state.Projects);
   GetAllProjects();
   useEffect(() => {
@@ -19,23 +18,6 @@ function Projects() {
       setprojectsData(projects);
     }
   }, [projects]);
-
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  const getParentWidth = () => {
-    if (parentRef.current) {
-      setparentWidth(parentRef.current.offsetWidth);
-    }
-    return 0;
-  };
-
-  useEffect(() => {
-    getParentWidth();
-    window.addEventListener("resize", getParentWidth);
-    return () => {
-      window.removeEventListener("resize", getParentWidth);
-    };
-  });
 
   return (
     <ProjectContainer>
@@ -50,14 +32,14 @@ function Projects() {
           <PrimaryButton>Freelancing</PrimaryButton>
         </div>
       </section>
-      <section className="content" ref={parentRef}>
+      <section className="content">
         {projectsData?.loading ? (
           "loading..."
         ) : projectsData?.error ? (
           <div>{projectsData.error}</div>
         ) : (
           projectsData?.data?.map((project: ProjectState, index) => (
-            <div style={{display:'flex'}} key={index}>
+            <div style={{ display: "flex" }} key={index}>
               <Card
                 title={project.projectName}
                 description={project.description}
