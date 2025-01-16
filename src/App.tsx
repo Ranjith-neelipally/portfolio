@@ -19,7 +19,7 @@ function App() {
   return (
     <RootElement
       className="overflow-auto"
-      // $flexDirection={isSize ? "column" : "row"}
+      // $flexDirection={isSize ? "column" : "row column"}
       // $padding="16px"
       $gap="16px"
     >
