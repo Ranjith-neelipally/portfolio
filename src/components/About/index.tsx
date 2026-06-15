@@ -20,7 +20,7 @@ function About() {
         </div>
         <div className="content-section">
           <div className="section">
-            {!aboutMeSection1 ? (
+            {aboutMeSection1 ? (
               <p style={{ whiteSpace: "pre-line" }}>{aboutMeSection1}</p>
             ) : (
               <p>
