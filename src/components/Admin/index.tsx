@@ -619,7 +619,7 @@ export default function Admin() {
           )}
 
           <ButtonContainer>
-            <Button type="submit">{isSignUp ? "Sign Up" : "Log In"}</Button>
+            <Button>{isSignUp ? "Sign Up" : "Log In"}</Button>
           </ButtonContainer>
         </Form>
         <ToggleText>
@@ -740,7 +740,7 @@ export default function Admin() {
           </FormGroup>
 
           <ButtonContainer>
-            <Button type="submit">Save Profile Settings</Button>
+            <Button>Save Profile Settings</Button>
             <OutButton type="button" onClick={handleLogout}>
               Log Out
             </OutButton>
@@ -793,7 +793,7 @@ export default function Admin() {
           </FormGroup>
 
           <ButtonContainer>
-            <Button type="submit">Create Project</Button>
+            <Button>Create Project</Button>
             <OutButton type="button" onClick={handleLogout}>
               Log Out
             </OutButton>
@@ -834,7 +834,7 @@ export default function Admin() {
           </FormGroup>
 
           <ButtonContainer>
-            <Button type="submit">Save Skills</Button>
+            <Button>Save Skills</Button>
             <OutButton type="button" onClick={handleLogout}>
               Log Out
             </OutButton>
