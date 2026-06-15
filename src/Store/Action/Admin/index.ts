@@ -59,6 +59,43 @@ export const GetAdminData = (email: Admin["email"]) => {
   }, [dispatch, baseUrl]);
 };
 
+export const GetAdminDataBySlug = (slug: string) => {
+  const baseUrl = getEnvVariable("VITE_REACT_APP_BASE_URL");
+  const dispatch = useDispatch();
+  const adminState = useAppSelector((state) => state.Admin);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!slug) return;
+      if (adminState.data?.slug === slug.toLowerCase()) {
+        return;
+      }
+
+      try {
+        dispatch(addAdminData({ loading: true, error: false }));
+        const response = await axios.get(`${baseUrl}portfolio/${slug}`);
+
+        if (response.status === 200 && response.data && response.data.success) {
+          const adminDetails: any = response.data.data;
+          dispatch(addAdminData({ data: adminDetails, loading: false }));
+          SessionStorageManager({
+            action: "set",
+            key: "admin",
+            data: adminDetails,
+          });
+        } else {
+          dispatch(addAdminData({ loading: false, error: "Portfolio not found" }));
+        }
+      } catch (error: any) {
+        console.error("Error fetching admin data:", error);
+        dispatch(addAdminData({ loading: false, error: error?.response?.data?.message || "Portfolio not found" }));
+      }
+    };
+
+    fetchData();
+  }, [dispatch, baseUrl, slug, adminState.data?.slug]);
+};
+
 export const AddProject = (email: Admin["email"]) => {
   const baseUrl = getEnvVariable("VITE_REACT_APP_BASE_URL");
 

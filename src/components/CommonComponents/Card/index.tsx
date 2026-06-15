@@ -16,7 +16,6 @@ function Card({
   previewImage,
   title,
   description,
-  $maxWidth,
   hideButton,
 }: CardProps) {
   const [isModalOpen, setisModalOpen] = useState(false);

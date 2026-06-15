@@ -1,9 +1,12 @@
 import { TopNavBar, Avatar } from "my-material-theme-ui-components";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../Store/Provider";
 
-function TopNavBarComponnet({ isMobile }: any) {
+function TopNavBarComponnet({ isMobile: _isMobile }: any) {
   const navigate = useNavigate();
+  const adminState = useAppSelector((state) => state.Admin);
+  const slug = adminState.data?.slug;
 
   const [currentUrl, setcurrentUrl] = useState("/");
 
@@ -19,11 +22,15 @@ function TopNavBarComponnet({ isMobile }: any) {
     };
   }, []);
 
-
   const handleClick = (path: string) => {
     navigate(path);
     setcurrentUrl(path);
   };
+
+  const getSlugPath = (subPath: string) => {
+    return slug ? `/${slug}${subPath === "/" ? "" : subPath}` : subPath;
+  };
+
   const NavItemArray = [
     {
       id: "home",
@@ -32,9 +39,9 @@ function TopNavBarComponnet({ isMobile }: any) {
       ariaLabel: "Navigation Item 1",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === "/",
+      $isActive: currentUrl === getSlugPath("/") || currentUrl === getSlugPath(""),
       onClick: () => {
-        handleClick("/");
+        handleClick(getSlugPath("/"));
       },
     },
     {
@@ -44,9 +51,9 @@ function TopNavBarComponnet({ isMobile }: any) {
       ariaLabel: "Navigation Item 2",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === "/about",
+      $isActive: currentUrl === getSlugPath("/about"),
       onClick: () => {
-        handleClick("/about");
+        handleClick(getSlugPath("/about"));
       },
     },
     {
@@ -56,9 +63,9 @@ function TopNavBarComponnet({ isMobile }: any) {
       ariaLabel: "Navigation Item 3",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === "/work",
+      $isActive: currentUrl === getSlugPath("/work"),
       onClick: () => {
-        handleClick("/work");
+        handleClick(getSlugPath("/work"));
       },
     },
     {
@@ -68,9 +75,9 @@ function TopNavBarComponnet({ isMobile }: any) {
       ariaLabel: "Navigation Item 4",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === "/skills",
+      $isActive: currentUrl === getSlugPath("/skills"),
       onClick: () => {
-        handleClick("/skills");
+        handleClick(getSlugPath("/skills"));
       },
     },
     {
@@ -80,9 +87,9 @@ function TopNavBarComponnet({ isMobile }: any) {
       ariaLabel: "Navigation Item 5",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === "/testimonial",
+      $isActive: currentUrl === getSlugPath("/testimonial"),
       onClick: () => {
-        handleClick("/testimonial");
+        handleClick(getSlugPath("/testimonial"));
       },
     },
     {
@@ -92,9 +99,9 @@ function TopNavBarComponnet({ isMobile }: any) {
       ariaLabel: "Navigation Item 6",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === "/contact",
+      $isActive: currentUrl === getSlugPath("/contact"),
       onClick: () => {
-        handleClick("/contact");
+        handleClick(getSlugPath("/contact"));
       },
     },
   ];
@@ -102,9 +109,9 @@ function TopNavBarComponnet({ isMobile }: any) {
   return (
     <TopNavBar
       navItems={NavItemArray}
-      topnavIcon={<Avatar label="Ranjith" />}
-      navbarHeaderText="Ranjith Neelipally"
-      navBarHeaderDesc="Front-end, UX/UI Developer"
+      topnavIcon={<Avatar label={adminState.data?.userName || "Ranjith"} />}
+      navbarHeaderText={adminState.data?.userName || "Ranjith Neelipally"}
+      navBarHeaderDesc={adminState.data?.userName ? "Full Stack Developer" : "Front-end, UX/UI Developer"}
       // $navLoaction={isMobile ? "" : "side"}
     />
   );

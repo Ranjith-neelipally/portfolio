@@ -3,13 +3,15 @@ import { getEnvVariable } from "../../../../utils/helpers";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getSkillsdata } from "../../../Slice/Skills";
+import { useAppSelector } from "../../../Provider";
 
 export const GetAllSkills = () => {
   const baseUrl = getEnvVariable("VITE_REACT_APP_BASE_URL");
-  const email = getEnvVariable("VITE_REACT_APP_ADMIN_EMAIL");
+  const email = useAppSelector((state) => state.Admin.data?.email);
   const dispatch = useDispatch();
   useEffect(() => {
     const getSkills = async () => {
+      if (!email) return;
       try {
         const response = await axios.get(`${baseUrl}skills`, {
           params: { email },
@@ -29,5 +31,5 @@ export const GetAllSkills = () => {
       }
     };
     getSkills();
-  }, [baseUrl, dispatch]);
+  }, [baseUrl, dispatch, email]);
 };

@@ -3,8 +3,13 @@ import {
   PrimaryButton,
 } from "../CommonComponents/CommonStyles/styles";
 import { AboutContainer } from "./styles";
+import { useAppSelector } from "../../Store/Provider";
 
 function About() {
+  const adminState = useAppSelector((state) => state.Admin);
+  const aboutMeSection1 = adminState.data?.aboutMeSection1;
+  const aboutMeSection2 = adminState.data?.aboutMeSection2;
+
   return (
     <ContentContainer>
       <AboutContainer>
@@ -15,11 +20,13 @@ function About() {
         </div>
         <div className="content-section">
           <div className="section">
-            <>
+            {!aboutMeSection1 ? (
+              <p style={{ whiteSpace: "pre-line" }}>{aboutMeSection1}</p>
+            ) : (
               <p>
                 Hey there! I'm Ranjith Neelipally,
                 <span className="highlighted-text">
-                  a front-end developer with 1.7 years of experience in
+                  a front-end developer with 3 years of experience in
                   transforming caffeine into &lt;&gt; code &lt;/&gt;
                 </span>
                 . Currently, I'm weaving my magic at{" "}
@@ -37,10 +44,12 @@ function About() {
                 Technology, and ever since, I've been on a mission to make the
                 web a more beautiful place, one pixel at a time.
               </p>
-            </>
+            )}
           </div>
           <div className="section">
-            <>
+            {aboutMeSection2 ? (
+              <p style={{ whiteSpace: "pre-line" }}>{aboutMeSection2}</p>
+            ) : (
               <p>
                 When I'm not busy debugging or creating stunning UI/UX designs,
                 you might find me hitting the gym, zooming around on my bicycle
@@ -53,7 +62,7 @@ function About() {
                   something amazing together!
                 </span>
               </p>
-            </>
+            )}
           </div>
         </div>
       </AboutContainer>

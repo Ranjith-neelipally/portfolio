@@ -4,6 +4,9 @@ export interface Admin {
   userName?: string;
   profilePic?: string;
   email?: string;
+  slug?: string;
+  aboutMeSection1?: string;
+  aboutMeSection2?: string;
 }
 
 export interface AdminPayload {

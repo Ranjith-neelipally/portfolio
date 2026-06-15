@@ -2,7 +2,7 @@ import { PrimaryButton } from "../CommonComponents/CommonStyles/styles";
 import { ProjectContainer } from "./styles";
 import { GetAllProjects } from "../../Store/Action/Projects";
 import { useAppSelector } from "../../Store/Provider";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ProjectsPayload,
   Projects as ProjectState,
@@ -11,7 +11,6 @@ import Card from "../CommonComponents/Card";
 
 function Projects() {
   const [projectsData, setprojectsData] = useState<ProjectsPayload>();
-  const [parentWidth, setparentWidth] = useState<number>(0);
   const projects: ProjectsPayload = useAppSelector((state) => state.Projects);
   GetAllProjects();
   useEffect(() => {
@@ -20,22 +19,6 @@ function Projects() {
     }
   }, [projects]);
 
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  const getParentWidth = () => {
-    if (parentRef.current) {
-      setparentWidth(parentRef.current.offsetWidth);
-    }
-    return 0;
-  };
-
-  useEffect(() => {
-    getParentWidth();
-    window.addEventListener("resize", getParentWidth);
-    return () => {
-      window.removeEventListener("resize", getParentWidth);
-    };
-  });
 
   return (
     <ProjectContainer>
@@ -50,7 +33,7 @@ function Projects() {
           <PrimaryButton>Freelancing</PrimaryButton>
         </div>
       </section>
-      <section className="content" ref={parentRef}>
+      <section className="content">
         {projectsData?.loading ? (
           "loading..."
         ) : projectsData?.error ? (

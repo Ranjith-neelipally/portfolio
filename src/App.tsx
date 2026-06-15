@@ -1,10 +1,11 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { RootElement, ContentWrapper } from "my-material-theme-ui-components";
 import TopNavBarComponnet from "./components/TopNavBar";
 import { toggleScreenSize } from "./Store/Action/Display";
 import { useSelector } from "react-redux";
+import PortfolioPage from "./components/PortfolioPage";
 
 function App() {
   const Home = lazy(() => import("./components/Home"));
@@ -19,8 +20,6 @@ function App() {
   return (
     <RootElement
       className="overflow-auto"
-      // $flexDirection={isSize ? "column" : "row column"}
-      // $padding="16px"
       $gap="16px"
     >
       <>
@@ -33,12 +32,13 @@ function App() {
               <ContentWrapper $backgroundColor="#ECE8DE">
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/skills" element={<Skills />} />
-                    <Route path="/testimonial" element={<Testimonials />} />
-                    <Route path="/work" element={<Work />} />
+                    <Route path="/" element={<Navigate to="/ranjith" replace />} />
+                    <Route path="/:slug" element={<PortfolioPage component={<Home />} />} />
+                    <Route path="/:slug/about" element={<PortfolioPage component={<About />} />} />
+                    <Route path="/:slug/contact" element={<PortfolioPage component={<Contact />} />} />
+                    <Route path="/:slug/skills" element={<PortfolioPage component={<Skills />} />} />
+                    <Route path="/:slug/testimonial" element={<PortfolioPage component={<Testimonials />} />} />
+                    <Route path="/:slug/work" element={<PortfolioPage component={<Work />} />} />
                     <Route path="/Admin" element={<Admin />} />
                     <Route path="*" element={<>no Page Found</>} />
                   </Routes>
