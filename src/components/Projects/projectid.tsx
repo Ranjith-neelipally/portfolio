@@ -1,15 +1,6 @@
-import { GetAllProjects } from "../../Store/Action/Projects";
-import { useAppSelector } from "../../Store/Provider";
-import { useEffect, useState } from "react";
 import {
-  ProjectsPayload,
-  Projects as ProjectState,
-} from "../../Store/Types/Projects";
-import {
-  RootElement,
   Button,
   Card,
-  Grid,
   Typography,
   ContentWrapper,
   Heading,
@@ -19,9 +10,6 @@ import {
 } from "my-material-theme-ui-components";
 import { getPortfolio } from "../../data";
 import { Link, useParams } from "react-router-dom";
-
-const Root = RootElement as any;
-const LibButton = Button as any;
 
 function ProjectDetailPage() {
   const { projectId } = useParams<{ projectId: string }>();
