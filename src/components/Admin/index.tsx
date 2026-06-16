@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axios from "axios";
-import { Button } from "my-material-theme-ui-components";
+import { Button, styled } from "my-material-theme-ui-components";
 import { getEnvVariable } from "../../utils/helpers";
 
 const Container = styled.div`

@@ -1,73 +1,97 @@
+import { Link } from "react-router-dom";
+import { getPortfolio } from "../../data";
 import {
-  ContentContainer,
-  PrimaryButton,
-} from "../CommonComponents/CommonStyles/styles";
-import { AboutContainer } from "./styles";
-import { useAppSelector } from "../../Store/Provider";
+  Typography,
+  ContentWrapper,
+  Badge,
+  Card,
+  Divider,
+  Heading,
+} from "my-material-theme-ui-components";
 
 function About() {
-  const adminState = useAppSelector((state) => state.Admin);
-  const aboutMeSection1 = adminState.data?.aboutMeSection1;
-  const aboutMeSection2 = adminState.data?.aboutMeSection2;
-
+  const portfolio = getPortfolio("ranjith");
+  if (!portfolio) {
+    console.error("Portfolio not found");
+    return <div>Portfolio not found</div>;
+  }
   return (
-    <ContentContainer>
-      <AboutContainer>
-        <div className="tool-bar">
-          <div>
-            <PrimaryButton>Download CV</PrimaryButton>
-          </div>
-        </div>
-        <div className="content-section">
-          <div className="section">
-            {aboutMeSection1 ? (
-              <p style={{ whiteSpace: "pre-line" }}>{aboutMeSection1}</p>
-            ) : (
-              <p>
-                Hey there! I'm Ranjith Neelipally,
-                <span className="highlighted-text">
-                  a front-end developer with 3 years of experience in
-                  transforming caffeine into &lt;&gt; code &lt;/&gt;
-                </span>
-                . Currently, I'm weaving my magic at{" "}
-                <a
-                  href="https://www.arcadis.com/en"
-                  className="current-company"
-                  target="_blank"
-                  tabIndex={0}
-                  title="Arcadis"
+    <>
+      <ContentWrapper $overflow="unset" $gap="20px">
+        <header>
+          <Typography variant="caption" colorType="secondary">
+            About
+          </Typography>
+          <Heading level={2} fontWeight="bold">
+            About {portfolio.name.split(" ")[0]}
+          </Heading>
+        </header>{" "}
+        <Card $padding="32px" $borderRadius="12px">
+          <Typography variant="body">{portfolio.bio}</Typography>
+          <Divider margin="24px 0" />
+          <Heading level={5} fontWeight="semibold">
+            Skills
+          </Heading>
+          <div style={{ display: "grid", gap: 16, marginTop: 16 }}>
+            {portfolio.skills.map((g) => (
+              <div key={g.category}>
+                <Typography variant="caption" colorType="secondary">
+                  {g.category}
+                </Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 6,
+                    marginTop: 6,
+                  }}
                 >
-                  Arcadis
-                </a>
-                , where I build user interfaces smoother than your morning
-                coffee. I graduated in 2023 from GuruNanak Institute of
-                Technology, and ever since, I've been on a mission to make the
-                web a more beautiful place, one pixel at a time.
-              </p>
-            )}
+                  {g.items.map((s) => (
+                    <Badge key={s} variant="outlined" colorType="primary">
+                      {s}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="section">
-            {aboutMeSection2 ? (
-              <p style={{ whiteSpace: "pre-line" }}>{aboutMeSection2}</p>
-            ) : (
-              <p>
-                When I'm not busy debugging or creating stunning UI/UX designs,
-                you might find me hitting the gym, zooming around on my bicycle
-                or motorcycle, or crafting eye-catching posters. With a knack
-                for React.js, Redux Toolkit, and all things front-end, I'm ready
-                to bring my A-game to new and exciting opportunities.{" "}
-                <span className="highlighted-text">
-                  So, if you're looking for a developer who can blend technical
-                  prowess with a sprinkle of humor, let's connect and create
-                  something amazing together!
-                </span>
-              </p>
-            )}
+        </Card>
+        <Card $padding="24px" $borderRadius="12px">
+          <Heading level={6} fontWeight="semibold">
+            Quick facts
+          </Heading>
+          <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
+            <Fact label="Location" value={portfolio.location} />
+            <Fact label="Timezone" value={portfolio.timezone} />
+            <Fact label="Email" value={portfolio.email} />
           </div>
-        </div>
-      </AboutContainer>
-    </ContentContainer>
+          <Divider margin="20px 0" />
+          <Link
+            to={`/${portfolio.username}/contact`}
+            style={{
+              color: portfolio.primaryColor,
+              textDecoration: "none",
+              fontSize: 14,
+            }}
+          >
+            Contact me →
+          </Link>
+        </Card>
+      </ContentWrapper>
+    </>
   );
 }
 
 export default About;
+function Fact({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <Typography variant="caption" colorType="secondary">
+        {label}
+      </Typography>
+      <Typography variant="body" fontWeight="medium">
+        {value}
+      </Typography>
+    </div>
+  );
+}

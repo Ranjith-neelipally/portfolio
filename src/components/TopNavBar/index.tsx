@@ -39,7 +39,8 @@ function TopNavBarComponnet({ isMobile: _isMobile }: any) {
       ariaLabel: "Navigation Item 1",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === getSlugPath("/") || currentUrl === getSlugPath(""),
+      $isActive:
+        currentUrl === getSlugPath("/") || currentUrl === getSlugPath(""),
       onClick: () => {
         handleClick(getSlugPath("/"));
       },
@@ -58,33 +59,34 @@ function TopNavBarComponnet({ isMobile: _isMobile }: any) {
     },
     {
       id: "navItem3",
-      label: "Work",
+      label: "Experience",
       className: "nav-item",
       ariaLabel: "Navigation Item 3",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === getSlugPath("/work"),
+      $isActive: currentUrl === getSlugPath("/experience"),
       onClick: () => {
-        handleClick(getSlugPath("/work"));
+        handleClick(getSlugPath("/experience"));
       },
     },
     {
       id: "navItem4",
-      label: "Skills",
+      label: "Projects",
       className: "nav-item",
       ariaLabel: "Navigation Item 4",
       isDisabled: false,
       isClickable: true,
-      $isActive: currentUrl === getSlugPath("/skills"),
+      $isActive: currentUrl === getSlugPath("/Projects"),
       onClick: () => {
-        handleClick(getSlugPath("/skills"));
+        handleClick(getSlugPath("/Projects"));
       },
     },
+
     {
-      id: "Contact",
+      id: "navItem6",
       label: "Testimonials",
       className: "nav-item",
-      ariaLabel: "Navigation Item 5",
+      ariaLabel: "Navigation Item 6",
       isDisabled: false,
       isClickable: true,
       $isActive: currentUrl === getSlugPath("/testimonial"),
@@ -93,10 +95,10 @@ function TopNavBarComponnet({ isMobile: _isMobile }: any) {
       },
     },
     {
-      id: "Testimonials",
+      id: "navItem7",
       label: "Contact",
       className: "nav-item",
-      ariaLabel: "Navigation Item 6",
+      ariaLabel: "Navigation Item 7",
       isDisabled: false,
       isClickable: true,
       $isActive: currentUrl === getSlugPath("/contact"),
@@ -111,8 +113,7 @@ function TopNavBarComponnet({ isMobile: _isMobile }: any) {
       navItems={NavItemArray}
       topnavIcon={<Avatar label={adminState.data?.userName || "Ranjith"} />}
       navbarHeaderText={adminState.data?.userName || "Ranjith Neelipally"}
-      navBarHeaderDesc={adminState.data?.userName ? "Full Stack Developer" : "Front-end, UX/UI Developer"}
-      // $navLoaction={isMobile ? "" : "side"}
+      navBarHeaderDesc={"Full Stack Developer"}
     />
   );
 }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "my-material-theme-ui-components";
 import { Flex, Flex1 } from "../CommonComponents/CommonStyles/styles";
 
 interface HomeComponentProps {

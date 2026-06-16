@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { GetAllTestimonials } from "../../Store/Action/Testimonial";
 import { useAppSelector } from "../../Store/Provider";
-import Card from "../CommonComponents/Card";
-import { PrimaryButton } from "../CommonComponents/CommonStyles/styles";
-import Modal from "../CommonComponents/Modal";
+import {
+  RootElement,
+  Button,
+  Card,
+  Modal,
+  Input,
+  TextArea,
+  Typography,
+  Grid,
+} from "my-material-theme-ui-components";
 
-import { TestimonialContainer } from "./styles";
+const Root = RootElement as any;
+const LibButton = Button as any;
 
 function Testimonials() {
   GetAllTestimonials();
@@ -16,6 +24,7 @@ function Testimonials() {
     message: "",
     email: "",
   });
+
   const handleModal = () => {
     setisModal(!isModal);
   };
@@ -32,61 +41,105 @@ function Testimonials() {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log(formData);
-  };
-
-  const RenderModalBody = () => {
-    return (
-      <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          name="userName"
-          onChange={handleForm}
-        />
-        <input type="email" name="email" onChange={handleForm} />
-        <textarea
-          placeholder="Enter Message"
-          name="message"
-          onChange={handleForm}
-        ></textarea>
-        <PrimaryButton type="submit">Submit</PrimaryButton>
-      </form>
-    );
+    // Handle form submission logic here
+    handleModal();
   };
 
   return (
-    <TestimonialContainer>
-      <div className="header">
-        <div>
-          <PrimaryButton onClick={handleModal}>Add Testimonials</PrimaryButton>
-          <Modal
-            $isModalOpen={isModal}
-            onbackdropClick={handleModal}
-            closeModal={handleModal}
-            childred={RenderModalBody()}
-            cardHeader="Add Testimonials"
-          />
-        </div>
-      </div>
-      <div className="body">
-        {AllData &&
-          AllData.length > 0 &&
+    <Root 
+      $padding="40px 24px" 
+      $backgroundColor="transparent"
+      style={{ maxWidth: "1200px", margin: "0 auto", width: "100%", display: "flex", flexDirection: "column", gap: "24px" }}
+    >
+      <Root
+        $backgroundColor="transparent"
+        $padding="0"
+        style={{ display: "flex", justifyContent: "flex-end" }}
+      >
+        <LibButton 
+          onClick={handleModal}
+          $backgroundColor="#2b59db"
+          $fontColor="#ffffff"
+          $borderRadius="9999px"
+          $padding="10px 20px"
+          $fontWeight="600"
+          $border="none"
+          $cursor="pointer"
+        >
+          Add Testimonial
+        </LibButton>
+      </Root>
+
+      <Grid columns={3} gap="24px">
+        {AllData && AllData.length > 0 ? (
           AllData.map((item: any) => (
-            <>
-              <div style={{ display: "flex" }} key={item._id}>
-                <Card
-                  hideButton={true}
-                  title={item.userName}
-                  description={item.message}
-                  $maxWidth={300}
-                ></Card>
-              </div>
-            </>
-          ))}
-      </div>
-    </TestimonialContainer>
+            <Card
+              key={item._id}
+              hideButton={true}
+              title={item.userName}
+              description={item.message}
+            />
+          ))
+        ) : (
+          <Typography variant="body" style={{ gridColumn: "span 3", textAlign: "left" }}>
+            No testimonials found.
+          </Typography>
+        )}
+      </Grid>
+
+      {/* Testimonials Form Modal */}
+      <Modal
+        isOpen={isModal}
+        onClose={handleModal}
+        title="Add Testimonials"
+        size="md"
+      >
+        <form onSubmit={handleFormSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "12px 0" }}>
+          <Input
+            label="Name"
+            type="text"
+            placeholder="Enter Name"
+            name="userName"
+            value={formData.userName}
+            onChange={handleForm}
+            fullWidth={true}
+          />
+          <Input
+            label="Email"
+            type="email"
+            placeholder="Enter Email"
+            name="email"
+            value={formData.email}
+            onChange={handleForm}
+            fullWidth={true}
+          />
+          <TextArea
+            label="Message"
+            placeholder="Enter Message"
+            name="message"
+            value={formData.message}
+            onChange={handleForm}
+            fullWidth={true}
+            rows={4}
+          />
+          <Root $padding="0" $backgroundColor="transparent" style={{ display: "flex", justifyContent: "flex-end", marginTop: "8px" }}>
+            <LibButton 
+              type="submit"
+              $backgroundColor="#2b59db"
+              $fontColor="#ffffff"
+              $borderRadius="9999px"
+              $padding="10px 20px"
+              $fontWeight="600"
+              $border="none"
+              $cursor="pointer"
+            >
+              Submit
+            </LibButton>
+          </Root>
+        </form>
+      </Modal>
+    </Root>
   );
 }
 

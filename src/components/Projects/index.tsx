@@ -1,56 +1,102 @@
-import { PrimaryButton } from "../CommonComponents/CommonStyles/styles";
-import { ProjectContainer } from "./styles";
-import { GetAllProjects } from "../../Store/Action/Projects";
-import { useAppSelector } from "../../Store/Provider";
-import { useEffect, useState } from "react";
 import {
-  ProjectsPayload,
-  Projects as ProjectState,
-} from "../../Store/Types/Projects";
-import Card from "../CommonComponents/Card";
+  Card,
+  Typography,
+  ContentWrapper,
+  Heading,
+  Badge,
+} from "my-material-theme-ui-components";
+import { getPortfolio } from "../../data";
+import { Link } from "react-router-dom";
 
 function Projects() {
-  const [projectsData, setprojectsData] = useState<ProjectsPayload>();
-  const projects: ProjectsPayload = useAppSelector((state) => state.Projects);
-  GetAllProjects();
-  useEffect(() => {
-    if (projects.data) {
-      setprojectsData(projects);
-    }
-  }, [projects]);
-
-
+  const portfolio = getPortfolio("ranjith");
+  if (!portfolio) {
+    console.error("Portfolio not found");
+    return <div>Portfolio not found</div>;
+  }
   return (
-    <ProjectContainer>
-      <section className="header-wrapper">
-        <h1 className="">Building Digital Wonders</h1>
-        <h1>Occasionally Breaking Them</h1>
-      </section>
-      <section className="toolbar">
-        <div>
-          <PrimaryButton>All</PrimaryButton>
-          <PrimaryButton>Professional</PrimaryButton>
-          <PrimaryButton>Freelancing</PrimaryButton>
-        </div>
-      </section>
-      <section className="content">
-        {projectsData?.loading ? (
-          "loading..."
-        ) : projectsData?.error ? (
-          <div>{projectsData.error}</div>
-        ) : (
-          projectsData?.data?.map((project: ProjectState, index) => (
-            <div style={{display:'flex'}} key={index}>
-              <Card
-                title={project.projectName}
-                description={project.description}
-                previewImage={project.projectPreview}
-              />
-            </div>
-          ))
-        )}
-      </section>
-    </ProjectContainer>
+    <ContentWrapper $overflow="unset" $gap="20px">
+      <header>
+        <Typography variant="caption" colorType="secondary">
+          Projects
+        </Typography>
+        <Heading level={2} fontWeight="bold">
+          Selected work
+        </Heading>
+        <Typography variant="body" colorType="secondary">
+          From internal tools to shipping mobile apps — click any project for
+          the full case study.
+        </Typography>
+      </header>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: 16,
+        }}
+      >
+        {portfolio.projects.map((p) => (
+          <Link
+            key={p.id}
+            to={`/project/${p.id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <Card $padding="0" $borderRadius="12px">
+              <div
+                style={{
+                  aspectRatio: "16 / 10",
+                  overflow: "hidden",
+                  borderRadius: "12px 12px 0 0",
+                  background: "#F3F4F6",
+                }}
+              >
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <div style={{ padding: 20, display: "grid", gap: 8 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "baseline",
+                  }}
+                >
+                  <Typography variant="caption" colorType="secondary">
+                    {p.tagline}
+                  </Typography>
+                  <Typography variant="caption" colorType="secondary">
+                    {p.year}
+                  </Typography>
+                </div>
+                <Typography variant="h5" fontWeight="semibold">
+                  {p.name}
+                </Typography>
+                <Typography variant="body" colorType="secondary">
+                  {p.description}
+                </Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 6,
+                    flexWrap: "wrap",
+                    marginTop: 8,
+                  }}
+                >
+                  {p.stack.map((t) => (
+                    <Badge key={t} variant="subtle" colorType="info">
+                      {t}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </ContentWrapper>
   );
 }
 
