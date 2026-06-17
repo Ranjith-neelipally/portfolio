@@ -1,236 +1,88 @@
-// import profileImg from "@/assets/profile.jpg";
-import researchpal from "../assets/research-pal.png";
-// import reclaim from "@/assets/project-reclaim.jpg";
-import inform from "../assets/inform.png";
-import curbiq from "../assets/curbiq.png";
-
-export type Project = {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  longDescription: string;
-  image?: string;
-  stack: string[];
-  features: string[];
-  role: string;
-  year: string;
-  links: { demo?: string; github?: string; caseStudy?: string };
-};
-
-export type ExperienceItem = {
-  id: string;
-  company: string;
-  role: string;
-  period: string;
-  location: string;
-  summary: string;
-  highlights: string[];
-  stack: string[];
-};
-
-export type SkillGroup = {
-  category: string;
-  items: string[];
-};
-
-export type Testimonial = {
-  id: string;
-  name: string;
-  role: string;
-  company?: string;
-  relationship?: string;
-  quote: string;
-  avatar?: string;
-  date: string;
-};
-
-export type Portfolio = {
-  username: string;
-  name: string;
-  title: string;
-  tagline: string;
-  bio: string;
-  avatar?: string;
-  location: string;
-  timezone: string;
-  email: string;
-  primaryColor: string;
-  stats: { label: string; value: string }[];
-  socials: { label: string; url: string }[];
-  experience: ExperienceItem[];
-  projects: Project[];
-  skills: SkillGroup[];
-  testimonials: Testimonial[];
-};
-
-const portfolios: Portfolio[] = [
+const PROJECTS = [
   {
-    username: "ranjith",
-    name: "Ranjith Neelipally",
-    title: "Full Stack Developer",
-    tagline:
-      "Building enterprise web and mobile applications with React, React Native and Node.js.",
-    bio: "Full Stack Developer with 3+ years of experience building enterprise web and mobile applications. Experienced in React, React Native, TypeScript, Node.js and MongoDB. Passionate about creating intuitive user experiences, scalable systems and products that solve real-world problems.",
-    // avatar: profileImg,
-    location: "Hyderabad, India",
-    timezone: "IST (UTC+5:30)",
-    email: "ranjithkumarneelipalli@gmail.com",
-    primaryColor: "#CCCB75",
-    stats: [
-      { label: "Years experience", value: "3+" },
-      { label: "Projects delivered", value: "15+" },
-      { label: "Enterprise products", value: "4+" },
-    ],
-    socials: [
-      { label: "GitHub", url: "https://github.com/yourusername" },
-      { label: "LinkedIn", url: "https://linkedin.com/in/yourusername" },
-      {
-        label: "Email",
-        url: "mailto:ranjithkumarneelipalli@gmail.com",
-      },
-    ],
-    experience: [
-      {
-        id: "arcadis",
-        company: "Arcadis IBI Group",
-        role: "Junior Software Developer",
-        period: "2022 — 2025",
-        location: "Hyderabad, India",
-        summary:
-          "Contributed to enterprise asset management and infrastructure platforms used by engineering teams across North America.",
-        highlights: [
-          "Developed reusable React components integrated with the Novus design system and Storybook.",
-          "Built project creation, file management and threaded comment features used across enterprise applications.",
-          "Contributed to React Native mobile applications including map-based asset search and filtering experiences.",
-        ],
-        stack: ["React", "React Native", "TypeScript", "Redux", "Storybook"],
-      },
-    ],
-    projects: [
-      {
-        id: "inform",
-        name: "Inform",
-        tagline: "Enterprise Asset Management Platform",
-        description:
-          "Enterprise asset management platform used by infrastructure and engineering organizations.",
-        longDescription:
-          "Worked on multiple modules within Inform, including project creation workflows, file management, responsive UI improvements and reusable component development. Contributed to both web and mobile experiences used by infrastructure management teams.",
-        image: inform,
-        stack: ["React", "TypeScript", "Redux", "Storybook"],
-        features: [
-          "Project creation workflows",
-          "File management",
-          "Responsive UI",
-          "Reusable components",
-        ],
-        role: "Frontend Developer",
-        year: "2024",
-        links: { demo: "#", caseStudy: "#" },
-      },
-      {
-        id: "curbiq",
-        name: "Curbiq",
-        tagline: "Parking Operations Management Platform",
-        description:
-          "Enterprise platform for managing parking regulations, operational workflows and accessibility requirements.",
-        longDescription:
-          "Contributed to parking regulation management features, accessibility improvements, multilingual support and operational workflows used by parking operators.",
-        image: curbiq,
-        stack: ["React", "TypeScript", "Redux"],
-        features: [
-          "Parking regulations",
-          "Accessibility improvements",
-          "Multi-language support",
-          "Operational workflows",
-        ],
-        role: "Frontend Developer",
-        year: "2023",
-        links: { demo: "#", github: "#", caseStudy: "#" },
-      },
-
-      {
-        id: "researchpal",
-        name: "ResearchPal",
-        tagline: "Agricultural Research Management Platform",
-        description:
-          "Offline-first research management platform for agricultural field experiments.",
-        longDescription:
-          "ResearchPal helps agricultural researchers manage projects, replications, treatments, plot-level observations and research notes. The platform supports offline workflows, structured field data collection and cross-platform access through web and mobile applications.",
-        image: researchpal,
-        stack: [
-          "React",
-          "React Native",
-          "TypeScript",
-          "Node.js",
-          "Express",
-          "MongoDB",
-        ],
-        features: [
-          "Replication × Treatment layouts",
-          "Offline-first workflow",
-          "Plot-level notes",
-          "Project management",
-        ],
-        role: "Founder & Full Stack Developer",
-        year: "2025",
-        links: {
-          demo: "https://www.research-pal.com",
-          github: "#",
-          caseStudy: "#",
-        },
-      },
-      {
-        id: "reclaim",
-        name: "ReClaim",
-        tagline: "Habit Recovery & Wellness Tracker",
-        description:
-          "Offline-first habit recovery and wellness tracking application.",
-        longDescription:
-          "ReClaim is a privacy-focused mobile application designed to help users recover from unhealthy habits and build sustainable routines. The app tracks recovery progress, visualizes health improvements and works completely offline.",
-        // image: reclaim,
-        stack: ["React Native", "Expo", "TypeScript"],
-        features: [
-          "Recovery tracking",
-          "Health insights",
-          "Offline-first",
-          "Custom habits",
-        ],
-        role: "Product Creator",
-        year: "2026",
-        links: { demo: "#", github: "#" },
-      },
-    ],
-    skills: [
-      {
-        category: "Frontend",
-        items: [
-          "React",
-          "React Native",
-          "TypeScript",
-          "Redux",
-          "HTML",
-          "CSS",
-          "JavaScript",
-        ],
-      },
-      {
-        category: "Backend",
-        items: ["Node.js", "Express", "MongoDB", "REST APIs"],
-      },
-      {
-        category: "Tools",
-        items: ["Git", "Storybook", "Figma", "Jira", "Postman"],
-      },
-    ],
-    testimonials: [],
+    no: "01",
+    name: "ResearchPal",
+    tagline: "An offline-first platform for agricultural research.",
+    blurb:
+      "A platform for agricultural researchers to manage projects, replications, treatments and plot-level observations — built to work in the middle of a field, with no signal. Web and mobile, one codebase where it counts.",
+    role: "Founder & Full Stack Developer.",
+    status: "Live · research-pal.com",
+    stack: ["React", "React Native", "TypeScript", "Node.js", "MongoDB"],
+    year: "2025",
+    href: "https://www.research-pal.com",
+  },
+  {
+    no: "02",
+    name: "ReClaim",
+    tagline: "A quiet tracker for getting your routines back.",
+    blurb:
+      "A privacy-first mobile app for recovering from unhealthy habits and rebuilding routines. Works fully offline, visualises real health improvements, and doesn't try to be your friend.",
+    role: "Product creator. Designed and built solo.",
+    status: "In progress · 2026",
+    stack: ["React Native", "Expo", "TypeScript"],
+    year: "2026",
+  },
+  {
+    no: "03",
+    name: "Inform",
+    tagline: "Enterprise asset management for infrastructure teams.",
+    blurb:
+      "Shipped project creation workflows, file management, threaded comments and a library of reusable components on top of the Novus design system. Used daily by infrastructure teams across North America.",
+    role: "Frontend Developer · Arcadis IBI Group.",
+    status: "Shipped · enterprise",
+    stack: ["React", "TypeScript", "Redux", "Storybook"],
+    year: "2024",
+  },
+  {
+    no: "04",
+    name: "Curbiq",
+    tagline: "Operations software for parking authorities.",
+    blurb:
+      "Worked on parking regulation management, accessibility upgrades, multilingual support and the operational workflows curb planners use to keep cities moving.",
+    role: "Frontend Developer · Arcadis IBI Group.",
+    status: "Shipped · enterprise",
+    stack: ["React", "TypeScript", "Redux"],
+    year: "2023",
   },
 ];
 
-export function getPortfolio(username: string): Portfolio | undefined {
-  return portfolios.find((p) => p.username === username);
-}
+const EXPERIENCE = [
+  {
+    years: "2022 — 2025",
+    role: "Junior Software Developer",
+    org: "Arcadis IBI Group",
+    note: "Built enterprise asset management and infrastructure platforms used across North America. Web on React, mobile on React Native — including map-based asset search and a reusable component library on top of the Novus design system.",
+  },
+  {
+    years: "2025 — Now",
+    role: "Founder & Full Stack Developer",
+    org: "ResearchPal",
+    note: "Building an offline-first research platform for agricultural field experiments. Designing, coding and shipping the product end-to-end.",
+  },
+];
 
-export function listPortfolios(): Portfolio[] {
-  return portfolios;
-}
+const TOOLS = [
+  "React",
+  "React Native",
+  "TypeScript",
+  "JavaScript",
+  "Redux",
+  "Node.js",
+  "Express",
+  "MongoDB",
+  "REST APIs",
+  "Storybook",
+  "Figma",
+  "Git",
+  "Jira",
+  "Postman",
+];
+
+const NOW = [
+  "Shipping ResearchPal to early agricultural research teams",
+  "Designing ReClaim — a quiet, offline habit tracker",
+  "Sketching ideas for small tools I'd actually use",
+  "Reading more, scrolling less",
+];
+
+export { PROJECTS, EXPERIENCE, TOOLS, NOW };

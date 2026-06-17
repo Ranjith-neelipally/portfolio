@@ -1,179 +1,130 @@
-import {
-  Button,
-  Card,
-  Typography,
-  ContentWrapper,
-  Heading,
-  Badge,
-  Divider,
-  FlexRow,
-} from "my-material-theme-ui-components";
-import { getPortfolio } from "../../data";
+import { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { PortfolioContext } from "../../context/PortfolioContext";
 
 function ProjectDetailPage() {
   const { projectId } = useParams<{ projectId: string }>();
-  const portfolio = getPortfolio("ranjith");
-  if (!portfolio) {
-    console.error("Portfolio not found");
-    return <div>Portfolio not found</div>;
+  const { portfolio, loading } = useContext(PortfolioContext);
+
+  // Reset scroll to top on mount
+  useEffect(() => {
+    const rootEl = document.getElementById("root");
+    if (rootEl) {
+      rootEl.scrollTop = 0;
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center bg-background">
+        <span className="font-mono-x text-xs uppercase tracking-[0.18em] text-foreground">
+          Loading<span className="ml-1 cursor-blink text-accent">▌</span>
+        </span>
+      </div>
+    );
   }
-  const project = portfolio.projects.find((p) => p.id === projectId);
-  if (!project) throw new Error("Project not found");
-  return (
-    <ContentWrapper $overflow="unset" $gap="20px">
-      <div style={{ display: "grid", gap: 24 }}>
+
+  const project = portfolio?.projects.find((p) => p.no === projectId);
+
+  if (!project) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-background px-6 text-foreground">
+        <h1 className="font-display text-4xl text-accent sm:text-5xl">Project Not Found</h1>
+        <p className="mt-4 text-muted-foreground">The project with ID "{projectId}" could not be found.</p>
         <Link
-          to="/Projects"
-          style={{ color: "#6B7280", textDecoration: "none", fontSize: 14 }}
+          to="/"
+          className="mt-8 font-mono-x text-xs uppercase tracking-[0.18em] text-foreground border border-border px-4 py-2 hover:bg-foreground hover:text-background transition"
         >
-          ← All projects
+          ← Back to Portfolio
         </Link>
+      </div>
+    );
+  }
 
-        <header>
-          <Typography variant="caption" colorType="secondary">
-            {project.tagline} · {project.year}
-          </Typography>
-          <Heading level={1} fontWeight="bold">
-            {project.name}
-          </Heading>
-          <Typography variant="body" colorType="secondary">
-            {project.description}
-          </Typography>
-        </header>
-
-        <div
-          style={{
-            aspectRatio: "16 / 9",
-            borderRadius: 16,
-            overflow: "hidden",
-            background: "#F3F4F6",
-          }}
-        >
-          <img
-            src={project.image}
-            alt={project.name}
-            style={{ width: "100%", height: "100%", objectFit: "fill" }}
-          />
+  return (
+    <div className="min-h-screen bg-background text-foreground px-6 py-12 sm:px-10 lg:px-16 animate-page-enter">
+      <div className="mx-auto max-w-[1000px]">
+        <div className="mb-12">
+          <Link
+            to="/"
+            className="font-mono-x text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-accent transition"
+          >
+            ← Back to Portfolio
+          </Link>
         </div>
 
-        <FlexRow>
-          <Card $padding="32px" $borderRadius="12px">
-            <Heading level={5} fontWeight="semibold">
-              Overview
-            </Heading>
-            <Typography variant="body">{project.longDescription}</Typography>
-            <Divider margin="24px 0" />
-            <Heading level={6} fontWeight="semibold">
-              Key features
-            </Heading>
-            <ul
-              style={{
-                paddingLeft: 20,
-                marginTop: 12,
-                display: "grid",
-                gap: 6,
-              }}
-            >
-              {project.features.map((f) => (
-                <li key={f} style={{ color: "#374151" }}>
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </Card>
+        <header className="border-b border-border pb-8 mb-12">
+          <div className="flex items-center gap-3 font-mono-x text-xs uppercase tracking-[0.2em] text-accent mb-4">
+            <span>№ {project.no}</span>
+            <span>·</span>
+            <span>{project.year}</span>
+            <span>·</span>
+            <span>{project.status}</span>
+          </div>
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl mb-6">
+            {project.name}
+          </h1>
+          <p className="text-xl sm:text-2xl italic text-muted-foreground font-display max-w-3xl">
+            {project.tagline}
+          </p>
+        </header>
 
-          <Card $padding="24px" $borderRadius="12px">
-            <Heading level={6} fontWeight="semibold">
-              Details
-            </Heading>
-            <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
-              <Fact label="Role" value={project.role} />
-              <Fact label="Year" value={project.year} />
+        <div className="grid grid-cols-12 gap-12">
+          {/* Main Info */}
+          <div className="col-span-12 lg:col-span-8">
+            <h2 className="font-mono-x text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
+              Overview
+            </h2>
+            <p className="text-base sm:text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
+              {project.blurb}
+            </p>
+          </div>
+
+          {/* Details Sidebar */}
+          <div className="col-span-12 lg:col-span-4 border-t border-border lg:border-t-0 lg:border-l lg:border-border lg:pl-10 pt-12 lg:pt-0">
+            <div className="space-y-8">
               <div>
-                <Typography variant="caption" colorType="secondary">
-                  Stack
-                </Typography>
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 6,
-                    marginTop: 6,
-                  }}
-                >
-                  {project.stack.map((s) => (
-                    <Badge key={s} variant="outlined" colorType="primary">
-                      {s}
-                    </Badge>
-                  ))}
-                </div>
+                <h3 className="font-mono-x text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+                  Role
+                </h3>
+                <p className="text-sm text-foreground">{project.role}</p>
               </div>
-            </div>
-            <Divider margin="20px 0" />
-            <div style={{ display: "grid", gap: 8 }}>
-              {project.links.demo && (
-                <a href={project.links.demo} style={{ textDecoration: "none" }}>
-                  <Button
-                    $backgroundColor={portfolio.primaryColor}
-                    $fontColor="#fff"
-                    $padding="10px 16px"
-                    $borderRadius="8px"
+
+              <div>
+                <h3 className="font-mono-x text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                  Stack
+                </h3>
+                <ul className="flex flex-wrap gap-2">
+                  {project.stack.map((s) => (
+                    <li
+                      key={s}
+                      className="font-mono-x text-[11px] uppercase tracking-[0.15em] bg-surface text-foreground border border-border px-2.5 py-1 rounded"
+                    >
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {project.href && (
+                <div className="pt-4">
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex w-full items-center justify-center font-mono-x text-xs uppercase tracking-[0.18em] bg-accent text-accent-foreground font-semibold px-5 py-3 hover:opacity-90 transition"
                   >
-                    Live demo →
-                  </Button>
-                </a>
-              )}
-              {project.links.github && (
-                <a
-                  href={project.links.github}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Button
-                    $backgroundColor="#fff"
-                    $fontColor="#111827"
-                    $border="1px solid #E5E7EB"
-                    $padding="10px 16px"
-                    $borderRadius="8px"
-                  >
-                    GitHub
-                  </Button>
-                </a>
-              )}
-              {project.links.caseStudy && (
-                <a
-                  href={project.links.caseStudy}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Button
-                    $backgroundColor="#fff"
-                    $fontColor="#111827"
-                    $border="1px solid #E5E7EB"
-                    $padding="10px 16px"
-                    $borderRadius="8px"
-                  >
-                    Case study
-                  </Button>
-                </a>
+                    Visit Project →
+                  </a>
+                </div>
               )}
             </div>
-          </Card>
-        </FlexRow>
+          </div>
+        </div>
       </div>
-    </ContentWrapper>
+    </div>
   );
 }
 
 export default ProjectDetailPage;
-function Fact({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <Typography variant="caption" colorType="secondary">
-        {label}
-      </Typography>
-      <Typography variant="body" fontWeight="medium">
-        {value}
-      </Typography>
-    </div>
-  );
-}

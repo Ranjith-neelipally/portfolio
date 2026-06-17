@@ -1,13 +1,10 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { PortfolioProvider } from "./context/PortfolioContext.tsx";
 
-import { Provider } from "react-redux";
-import { Store } from "./Store/Provider";
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <>
-    <Provider store={Store}>
-      <App />
-    </Provider>
-  </>,
+  <PortfolioProvider>
+    <App />
+  </PortfolioProvider>,
 );
