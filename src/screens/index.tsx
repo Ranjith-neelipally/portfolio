@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { PortfolioContext } from "../context/PortfolioContext";
 import TopBar from "../components/TopBar";
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 import Projects from "../components/Projects";
 import Now from "../components/Now";
 import Experience from "../components/Experience";
