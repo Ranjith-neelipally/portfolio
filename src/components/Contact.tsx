@@ -30,12 +30,12 @@ function Contact() {
           <ContactCol
             label="github"
             value="@ranjith"
-            href="https://github.com/yourusername"
+            href="https://github.com/Ranjith-neelipally"
           />
           <ContactCol
             label="linkedin"
             value="/in/ranjith"
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/ranjith-kumar-reddy-neelipally-2b8474250/"
           />
           <ContactCol label="located" value="Hyderabad, IN" />
         </div>
